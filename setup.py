@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "DS18B20_collect = pkg_temperature.DS18B20_collect:main"
         ],
     },
 )
