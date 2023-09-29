@@ -8,15 +8,15 @@ class TemperaturePublisher(Node):
         super().__init__('DS18B20_collect')
         self.sensor = W1ThermSensor()
 
-        self.publisher = self.create_publisher(Float64, 'temperature', 10)
-        self.timer = self.create_timer(1.0, self.publish_temperature)
+        self.publisher = self.create_publisher(Float64, '/temperature', 10)
+        self.timer = self.create_timer(0.1, self.publish_temperature)
 
     def publish_temperature(self):
         temperature = self.sensor.get_temperature()
         msg = Float64()
         msg.data = temperature
         self.publisher.publish(msg)
-        self.get_logger().info(f'Temperature: {temperature} Celsius')
+        self.get_logger().debug(f'Temperature: {temperature} Celsius')
 
 def main(args=None):
     rclpy.init(args=args)
